@@ -18,6 +18,8 @@ The game will simulate battle between tanks in battles.
 - Precision: Chance of hitting target
 - Damage: Raw damage dealt by ammunition
 - Health: Life of the tank
+- Type: Type of tank
+- Model: Model name
 
 #### Battle mechanics
 General
