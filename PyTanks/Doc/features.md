@@ -8,6 +8,7 @@ The game will simulate battle between tanks in battles.
 #### Tank traits
 - **Tank Destroyer**: Critical hit chance, dealing 50% extra damage
 - **Heavy**: Armor resistance chance to reduce damage taken by 50%
+- **Medium**: The random modifiers for penetration and damaging can't be negative
 - **Light**: Escape chance, making hit to miss
 - **Artillery**: Chance to stun tanks, making them unable to shoot for a turn
 
@@ -26,6 +27,7 @@ General
 - When the health is reduced to 0, the tank is removed from battle
 - When only thanks from one side remains, the time is victorious
 - The human player can choose a tank to play with at the start of each battle
+- The IA are piking random tanks, with a maximum from 2 arty by team
 
 Hitting
 - The precision define the accuracy of the shoot. 
@@ -42,6 +44,9 @@ Damage:
 - The damage dealt to the remote tank has random modifier from +/- 20%
 
 Player progression:
-- The tank from the player can earn experience
-- The experience can be spent on improving the tanks characteristics
+- The player can earn experience and money in battle
+- The experience can be spent on improving the tanks characteristics with modules
 - The progression is saved in a local file, including tanks and experience
+- The player start with a medium tank, new tank can be purchased
+- Destroying a tank give money and experience
+- Losing the battle reduce rewards by 50% and winning it increase it by 50%.
