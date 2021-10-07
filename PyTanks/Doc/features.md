@@ -9,7 +9,7 @@ The game will simulate battle between tanks in battles.
 - **Tank Destroyer**: Critical hit chance, dealing 50% extra damage
 - **Heavy**: Armor resistance chance to reduce damage taken by 50%
 - **Medium**: The random modifiers for penetration and damaging can't be negative
-- **Light**: Escape chance, making hit to miss
+- **Light**: Chance to dodge damage, making hit to miss
 - **Artillery**: Chance to stun tanks, making them unable to shoot for a turn
 
 #### Tank attributes
