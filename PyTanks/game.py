@@ -1,20 +1,20 @@
-import random
-from copy import copy
 
 from PyTanks.Tanks.tank_factory import TankFactory
-from PyTanks.wot_api import WotAPI
+from PyTanks.team import Team
 
 
 class Game:
 
     def __init__(self):
         factory = TankFactory()
-        factory.load_tank_from_json(1)
+        factory.load_tanks_from_api(1)
+        self.team_1 = Team('team Conqueror')
+        self.team_2 = Team('Panzer Elite')
+        self.team_1.generate_players(15, factory.get_tank_list())
+        self.team_2.generate_players(15, factory.get_tank_list())
 
-        tank_1 = copy(factory.tank_list[random.randint(0, len(factory.tank_list)-1)])
-        tank_2 = copy(factory.tank_list[random.randint(0, len(factory.tank_list)-1)])
 
-        print(f'Combat started between {tank_1.model} and {tank_2.model}')
-        while not tank_2.death and not tank_1.death:
-            tank_1.inflict_damage(tank_2)
-            tank_2.inflict_damage(tank_1)
+
+
+
+

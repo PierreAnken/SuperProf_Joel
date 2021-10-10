@@ -2,10 +2,28 @@ import random
 
 
 class Player:
+    nicknames = ['Blacklight',
+                 'OwlChick',
+                 'CitarNosis',
+                 'ThunderHawk',
+                 'PowerGrab',
+                 'Seismology',
+                 'RichterScales',
+                 'Palpebral',
+                 'Maggotta',
+                 'Myopia',
+                 'MsMittens',
+                 'Monstrum',
+                 'PanzerElite',
+                 'BatBoy',
+                 'Slyrack']
 
-    def __init__(self, active_tank, nickname):
-        if type(active_tank).__name__ != 'BaseTank':
-            raise ValueError('Invalid tank')
+    def __init__(self, active_tank, nickname=None):
+
+        if not nickname:
+            nickname = self.nicknames[random.randint(0, len(self.nicknames)-1)]
+            nickname = f'{nickname}_{random.randint(1, 100)}'
+
         self.active_tank = active_tank
         self.nickname = nickname
 
@@ -15,11 +33,11 @@ class Player:
             raise ValueError('Other team is invalid')
 
         # select only players with active tanks
-        active_enemies = list(filter(lambda player: player.active_tank.alive, other_team.list_player))
+        active_enemies = list(filter(lambda player: not player.active_tank.death, other_team.list_player))
 
         # arty are focused at the end
-        arty_players = list(filter(lambda player: player.active_tank.tank_type == 5, active_enemies))
-        non_arty_players = list(filter(lambda player: player.active_tank.tank_type != 5, active_enemies))
+        arty_players = list(filter(lambda player: type(player.active_tank).__name__ == 'ArtyTank', active_enemies))
+        non_arty_players = list(filter(lambda player: type(player.active_tank).__name__ != 'ArtyTank', active_enemies))
 
         if len(non_arty_players) != 0:
             target_player = non_arty_players[random.randint(0, len(non_arty_players) - 1)]
@@ -28,5 +46,3 @@ class Player:
 
         print('%s targeting %s' % (self.nickname, target_player.nickname))
         return target_player
-
-
