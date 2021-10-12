@@ -1,7 +1,7 @@
-import random
+from copy import copy
+from random import sample
 
 from PyTanks.player import Player
-from PyTanks.utils import get_random_element_from_list
 
 
 class Team:
@@ -15,7 +15,7 @@ class Team:
         if player in self.list_player:
             raise ValueError('Player already team')
 
-        if type(player).__name__ != 'Player':
+        if type(player) != Player:
             raise ValueError('Invalid player')
 
         self.list_player.append(player)
@@ -24,12 +24,24 @@ class Team:
         if team_size < 1 or team_size > 15:
             raise ValueError('invalid team size (1-15)')
 
+        print(f'\nTeam {self.name} generated with {team_size} players')
+
         for i in range(1, team_size + 1):
-            player_tank = get_random_element_from_list(tank_list)
+            player_tank = copy(sample(tank_list, 1)[0])
             new_player = Player(player_tank)
             self.add_player(new_player)
 
+            print(f' - {new_player.nickname} with tank { player_tank.model} ')
 
+    def team_is_alive(self):
+        return self.get_alive_tank_number() != 0
+
+    def get_alive_tank_number(self):
+        alive_tank = 0
+        for player in self.list_player:
+            if not player.active_tank.death:
+                alive_tank += 1
+        return alive_tank
 
 
 

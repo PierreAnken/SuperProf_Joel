@@ -12,7 +12,7 @@ class BaseTank:
         default_profile = tank_data.get('default_profile')
         self.armor_dict = default_profile.get('armor').get('hull')
         self.health = default_profile.get('hp')
-        self.precision = round((1 - default_profile.get('gun').get('dispersion'))*100) -10
+        self.precision = round((1 - default_profile.get('gun').get('dispersion')) * 100) - 10
 
         ammo_list = default_profile.get('ammo')
         self.ammo_damage = None
@@ -37,20 +37,17 @@ class BaseTank:
         return False
 
     def inflict_damage(self, enemy_tank):
+        result = None
         if not self.death:
-
             if random.randint(1, 100) >= self.precision:
                 enemy_tank.receive_damage(self.ammo_damage)
                 result = 'hit'
             else:
                 result = 'miss!'
-            print(f'{self.model} shooting at {enemy_tank.model} - {result}')
+        return result
 
     def receive_damage(self, damage_amount):
         if not self.death:
             self.health -= damage_amount
-            print(f'{damage_amount} damage received, new health {max(0, self.health)}')
             if self.health <= 0:
                 self.death = True
-                print(f'{self.model} killed')
-
